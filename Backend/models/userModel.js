@@ -1,38 +1,43 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const UserSchema=new  mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    mobile:{
-        type:Number,
-        required:true,
-        match: [/^\d{10}$/, "Phone number must be exactly 10 digits"],
+    mobile: {
+        type: Number,
+        required: true,
+        match: [/^\d{10}$/, "Phone number must be exactly 10 digits"]
     },
-    role:{
-        type:String,
-        enum:['Divyangjan','Caregiver'],
-        required:true,
-        default:'Divyangjan'
-
+    role: {
+        type: String,
+        enum: ['Divyangjan', 'Caregiver'],
+        required: true,
+        default: 'Divyangjan'
     },
-    createAat:{
-        type:Date,
-        default:Date.now(),
-
+    createAat: {
+        type: Date,
+        default: Date.now()
     },
-    location:{
-        type:{
-            type:String,
-            enum:["Point"],
-            default:"Point",
+    location: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            default: "Point"
         },
-        coordinates:{
-            type:[Number],
-            required:true,
+        coordinates: {
+            type: [Number],
+            required: true
         }
-    }
+    },
+
+  //This is now in the right place (outside of location)
+    caregiverAssigned: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 });
-const User=mongoose.model('User',UserSchema);
-module.exports=User;
+
+const User = mongoose.model('User', UserSchema);
+module.exports = User;

@@ -2,9 +2,12 @@ const express=require('express');
 const mongoose=require('mongoose');
 const websocket=require('websocket');
 const bodyParser=require('body-parser');
+const db=require('./db');
+
 
 const app=express(); //ek uska instance bna diya 
 app.use(bodyParser.json()); //req.body m savw krega missle ware taki aasani se data acess ho sake 
+
 
 const audioRoutes=require('./Routes/audio');
 const cameraRoutes=require('./Routes/camera');
@@ -23,7 +26,7 @@ const whtsaapRoutes=require('./Routes/whatsaap');
 // app.use('/keyword',keywordRoutes);
 // app.use('/session',sessionRoutes);
 // app.use('/textlog',textlogRoutes);
-// app.use('/user',userRoutes);
+ app.use('/user',userRoutes);
 // app.use('/whtsapap',whtsaapRoutes);
 
 require('dotenv').config();
