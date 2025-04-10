@@ -36,7 +36,9 @@ const UserSchema = new mongoose.Schema({
     caregiverAssigned: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+
+    
 });
 
 const User = mongoose.model('User', UserSchema);
